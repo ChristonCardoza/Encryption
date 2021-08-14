@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "listener": "nodemon listener.js",
+    "emitter": "nodemon emitter.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christon Cardoza",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3",
+    "socket.io-client": "^4.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
