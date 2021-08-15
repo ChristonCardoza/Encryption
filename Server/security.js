@@ -12,11 +12,7 @@ const emitterPublicKey64 = emitter.getPublicKey().toString('base64');
 const listenerSharedKey = listener.computeSecret(emitterPublicKey64, 'base64', 'hex');
 const emitterSharedKey = emitter.computeSecret(listenerPublicKey64, 'base64', 'hex');
 
-const emitterIv = crypto.randomBytes(16)
-const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(emitterSharedKey, 'hex'), emitterIv);
-
 module.exports = {
-    emitterIv,
-    cipher,
-    listenerSharedKey
+    listenerSharedKey,
+    emitterSharedKey
 }

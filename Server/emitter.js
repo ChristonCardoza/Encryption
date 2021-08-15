@@ -1,24 +1,27 @@
 const io = require("socket.io-client");
-let auth_tag;
-const message = require('./MessageSample');
-const {emitterIv, cipher} = require("./security");
+const crypto = require('crypto');
 
-let socket = io.connect("http://localhost:5000/");
+const {__createMessage} = require('./MessageSample');
+const { emitterSharedKey} = require("./security");
 
-console.log('Message',message);
 
-const _setPayload = () => {
+const _setPayload = (message) => {
     
     const data = JSON.stringify(message);
+
+    const emitterIv = crypto.randomBytes(16)
+    const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(emitterSharedKey, 'hex'), emitterIv);
 
     let encrypt = cipher.update(data, 'utf8', 'hex')
     encrypt += cipher.final('hex');
 
-    auth_tag = cipher.getAuthTag().toString('hex');
+    const auth_tag = cipher.getAuthTag().toString('hex');
     const payload = emitterIv.toString('hex') + encrypt + auth_tag;
     const payload64 = Buffer.from(payload, 'hex').toString('base64');
 
-
+    console.log('***************************************************************************************************');
+    console.log('*                                    Sending Data                                                 *');
+    console.log('***************************************************************************************************');
     console.table( {
         emmiter_iv: emitterIv.toString('hex'),
         emitter_encrypted: encrypt,
@@ -29,13 +32,22 @@ const _setPayload = () => {
     return payload64;
 }
 
-const sendData = _setPayload();
-
-socket.on("Welcome", (data) => {
-    console.log("Received:", data);
-});
 
 
-socket.emit('sendMessage', sendData);
+const __startEmitter = () => {
 
-module.exports = {sendData}
+    const socket = io.connect("http://localhost:5000/");
+
+    socket.on("Welcome", (data) => {
+        console.log("Received:", data);
+    });
+
+    setInterval(async () =>{
+        const message = await __createMessage();
+        console.log('Message: ',message);
+        sendData = await _setPayload(message);
+        await socket.emit('sendMessage', sendData);
+    }, 10000);
+}
+
+__startEmitter();

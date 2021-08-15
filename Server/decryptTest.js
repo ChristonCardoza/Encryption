@@ -8,6 +8,9 @@ const _getMessage = ( encryptedData) => {
     const listener_encrypted = listener_payload.substr(32, listener_payload.length - 64);
     const listener_auth_tag = listener_payload.substr(listener_payload.length - 32, 32)
     
+    console.log('***************************************************************************************************');
+    console.log('*                                    Received Data                                                *');
+    console.log('***************************************************************************************************');
     console.table({
         received_msg64 : encryptedData,
         received_msg: listener_payload,
@@ -32,6 +35,7 @@ const _getMessage = ( encryptedData) => {
     }catch( error){
         console.log(error.message)
     }
+    console.log("************************************************************");
 }
 
 module.exports={_getMessage}

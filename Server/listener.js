@@ -15,11 +15,8 @@ io.on("connection", (socket) => {
     socket.emit("Welcome", `Hello, ${socket.id}`);
     console.log(`\nEmitter ${socket.id} has established the connection`);
 
-    socket.on('sendMessage', async (data) => {
-        console.log("\nReceived:", data);
-        console.log("\nSenData:", sendData)
-        console.log(data === sendData)
-        await _getMessage(data)
+    socket.on('sendMessage', (data) => {
+        _getMessage(data)
     });
 
     socket.on('disconnect', () => console.log(`Emitter ${socket.id} has disconnection`));
