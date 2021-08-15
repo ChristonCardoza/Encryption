@@ -3,14 +3,22 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const {_startEmitter} = require('./Socket/emitter');
 const {_decryptMessage} = require('./Security/decryptMessage');
 const {_insertMessage} = require('./utils/dbInsertion');
+const messageRoutes = require('./routes/messages');
 
 app.get('/', (req, res) => {
 	res.send('Running');
 });
+
+// cors middleware
+app.use(cors());
+
+
+app.use('/messages',messageRoutes)
 
 const TotalMessage = [];
 let currentTime = new Date();

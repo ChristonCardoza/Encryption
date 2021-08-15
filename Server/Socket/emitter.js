@@ -12,6 +12,11 @@ const _startEmitter = () => {
         console.log("Received:", data);
     });
 
+    const message = _createMessage();
+    console.log('Message: ',message);
+    sendData = _encryptMessage(message);
+    socket.emit('sendMessage', sendData);
+
     setInterval(async () =>{
         const message = await _createMessage();
         console.log('Message: ',message);
