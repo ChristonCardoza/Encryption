@@ -32,6 +32,8 @@ const _decryptMessage = ( encryptedData) => {
         decrypted += decipher.final('utf8');
 
         console.log('\nDecrypted Message:', decrypted);
+
+        return decrypted;
     }catch( error){
         console.log(error.message)
     }

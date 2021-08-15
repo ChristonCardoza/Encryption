@@ -21,4 +21,3 @@ const _startEmitter = () => {
 }
 
 module.exports = { _startEmitter};
-
