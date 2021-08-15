@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "listener": "nodemon listener.js",
-    "emitter": "nodemon emitter.js",
+    "start": "nodemon listener.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christon Cardoza",
