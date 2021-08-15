@@ -50,3 +50,26 @@ Bonus consideration will be given if tests are also written.
 Bonus for Dockerising the apps
 Submission
 Share the github repository and hosted app link with a readme on how to run the code. If you have any other doubts, get in touch with us
+
+# Solution
+
+## Pre-Requisite
+
+1. Node: 14.15
+2. npm: 6.14
+3. dB: https://cloud.mongodb.com/ 
+
+## Deployment
+
+##### Server:
+
+1. Login to `https://cloud.mongodb.com/ ` to create mongodb cluster, user,network access and connection url
+2. Create a `.env` file and add PORT and CONNECTION_URL in it. `.env.example` file
+3. Run `npm install` it will install all dependencies 
+4. Run `npm start` for running the server
+5. Open browser and check server is up or not, example `http://localhost:5000/` or `http://localhost:5000/messages`
+
+##### Client:
+
+1. Run `npm install` it will install all dependencies 
+2. Run `npm start` for running the client, example `http://localhost:3000/`
