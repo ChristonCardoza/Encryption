@@ -1,11 +1,7 @@
-const io = require("socket.io-client");
 const crypto = require('crypto');
+const {emitterSharedKey} = require('./security');
 
-const {__createMessage} = require('./MessageSample');
-const { emitterSharedKey} = require("./security");
-
-
-const _setPayload = (message) => {
+const _encryptMessage = (message) => {
     
     const data = JSON.stringify(message);
 
@@ -32,22 +28,4 @@ const _setPayload = (message) => {
     return payload64;
 }
 
-
-
-const __startEmitter = () => {
-
-    const socket = io.connect("http://localhost:5000/");
-
-    socket.on("Welcome", (data) => {
-        console.log("Received:", data);
-    });
-
-    setInterval(async () =>{
-        const message = await __createMessage();
-        console.log('Message: ',message);
-        sendData = await _setPayload(message);
-        await socket.emit('sendMessage', sendData);
-    }, 10000);
-}
-
-__startEmitter();
+module.exports={_encryptMessage}

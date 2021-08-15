@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const {listenerSharedKey} = require('./security');
 
-const _getMessage = ( encryptedData) => {
+const _decryptMessage = ( encryptedData) => {
     
     const listener_payload = Buffer.from(encryptedData, 'base64').toString('hex');
     const listener_iv= listener_payload.substr(0, 32);
@@ -38,4 +38,4 @@ const _getMessage = ( encryptedData) => {
     console.log("************************************************************");
 }
 
-module.exports={_getMessage}
+module.exports={_decryptMessage}

@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const {names, cities} = require('./data.json');
 
 
-const __createMessage = () => {
+const _createMessage = () => {
     const originalMessage = {
         name:  names[Math.floor(Math.random() * names.length)],
         origin: cities[Math.floor(Math.random() *cities.length)],
@@ -13,4 +13,4 @@ const __createMessage = () => {
     return originalMessage;
 }
 
-module.exports = {__createMessage};
+module.exports = {_createMessage};
